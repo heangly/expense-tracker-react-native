@@ -1,4 +1,4 @@
-export const GLOBALCOLORS = {
+export const GLOBAL_COLORS = {
   primary50: '#e4d9fd',
   primary100: '#c6affc',
   primary200: '#a281f0',

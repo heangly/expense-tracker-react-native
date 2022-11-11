@@ -1,8 +1,9 @@
 import { CompositeScreenProps } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { Text } from 'react-native'
 import { RootBottomTabsParamList, RootStackParamList } from '../commons/types'
+import ExpensesOutput from '../components/Expenses/ExpensesOutput'
+import DUMMY_EXPENSES from '../data/dummyData'
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<RootBottomTabsParamList, 'RecentExpenses'>,
@@ -10,7 +11,9 @@ type Props = CompositeScreenProps<
 >
 
 const RecentExpenses: React.FC<Props> = () => {
-  return <Text>RecentExpenses</Text>
+  return (
+    <ExpensesOutput expenses={DUMMY_EXPENSES} expensesPeriod='Last 7 Days' />
+  )
 }
 
 export default RecentExpenses

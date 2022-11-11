@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
-import { GLOBALCOLORS } from '../../commons/constants'
+import { GLOBAL_COLORS } from '../../commons/constants'
 import { RootBottomTabsParamList } from '../../commons/types'
 import AllExpenses from '../../screens/AllExpenses'
 import RecentExpenses from '../../screens/RecentExpenses'
@@ -11,10 +11,15 @@ const BottomTabNavigator = () => {
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: GLOBALCOLORS.primary500 },
+        headerStyle: {
+          backgroundColor: GLOBAL_COLORS.primary500,
+          shadowColor: 'transparent'
+        },
         headerTintColor: 'white',
         tabBarStyle: {
-          backgroundColor: GLOBALCOLORS.primary500
+          backgroundColor: GLOBAL_COLORS.primary500,
+          borderTopWidth: 0, // remove white line on top of tab bar
+          paddingTop: 5
         },
         tabBarActiveTintColor: 'white'
       }}
