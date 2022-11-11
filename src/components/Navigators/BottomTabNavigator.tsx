@@ -4,10 +4,13 @@ import { GLOBAL_COLORS } from '../../commons/constants'
 import { RootBottomTabsParamList } from '../../commons/types'
 import AllExpenses from '../../screens/AllExpenses'
 import RecentExpenses from '../../screens/RecentExpenses'
+import IconButton from '../UI/IconButton'
 
 const BottomTabs = createBottomTabNavigator<RootBottomTabsParamList>()
 
 const BottomTabNavigator = () => {
+  const onPress = () => {}
+
   return (
     <BottomTabs.Navigator
       screenOptions={{
@@ -21,7 +24,15 @@ const BottomTabNavigator = () => {
           borderTopWidth: 0, // remove white line on top of tab bar
           paddingTop: 5
         },
-        tabBarActiveTintColor: 'white'
+        tabBarActiveTintColor: 'white',
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            iconName='add'
+            size={24}
+            color={tintColor as string}
+            onPress={onPress}
+          />
+        )
       }}
     >
       <BottomTabs.Screen

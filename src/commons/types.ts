@@ -1,4 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
+import { Ionicons } from '@expo/vector-icons'
 
 export type RootStackParamList = {
   BottomTabs: undefined
@@ -21,3 +22,5 @@ export type ExpensesAndPeriod = {
   expenses: Expense[]
   expensesPeriod: string
 }
+
+export type Icon = keyof typeof Ionicons.glyphMap
