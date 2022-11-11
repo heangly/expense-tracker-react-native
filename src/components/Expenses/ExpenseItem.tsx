@@ -1,11 +1,16 @@
+import { useNavigation } from '@react-navigation/native'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { GLOBAL_COLORS } from '../../commons/constants'
-import { getFormattedDate } from '../../utils/date'
+import { RootNativeNavigationProp } from '../../commons/types'
 
-type Props = { description: string; amount: number; date: Date }
+type Props = { id: string; description: string; amount: number; date: string }
 
-const ExpenseItem: React.FC<Props> = ({ description, amount, date }) => {
-  const onPress = () => {}
+const ExpenseItem: React.FC<Props> = ({ id, description, amount, date }) => {
+  const nagivation = useNavigation<RootNativeNavigationProp>()
+
+  const onPress = () => {
+    nagivation.navigate('ManageExpense', { expenseId: id })
+  }
 
   return (
     <Pressable
@@ -17,7 +22,7 @@ const ExpenseItem: React.FC<Props> = ({ description, amount, date }) => {
           <Text style={[styles.textBase, styles.description]}>
             {description}
           </Text>
-          <Text style={styles.textBase}>{getFormattedDate(date)}</Text>
+          <Text style={styles.textBase}>{date}</Text>
         </View>
 
         <View style={styles.amountContainer}>

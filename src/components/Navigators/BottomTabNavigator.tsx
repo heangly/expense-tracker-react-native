@@ -1,15 +1,23 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { GLOBAL_COLORS } from '../../commons/constants'
-import { RootBottomTabsParamList } from '../../commons/types'
 import AllExpenses from '../../screens/AllExpenses'
 import RecentExpenses from '../../screens/RecentExpenses'
 import IconButton from '../UI/IconButton'
+import {
+  RootBottomTabsParamList,
+  RootNativeNavigationProp
+} from '../../commons/types'
 
 const BottomTabs = createBottomTabNavigator<RootBottomTabsParamList>()
 
 const BottomTabNavigator = () => {
-  const onPress = () => {}
+  const nagivation = useNavigation<RootNativeNavigationProp>()
+
+  const onPress = () => {
+    nagivation.navigate('ManageExpense', { expenseId: null })
+  }
 
   return (
     <BottomTabs.Navigator
