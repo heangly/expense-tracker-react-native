@@ -3,14 +3,10 @@ import { useLayoutEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { GLOBAL_COLORS } from '../commons/constants'
 import { RootNativeStackParamList } from '../commons/types'
-import Button from '../components/UI/Button'
+import ExpenseForm from '../components/ManageExpense/ExpenseForm'
 import IconButton from '../components/UI/IconButton'
 import { useAppDispatch } from '../store'
-import {
-  addExpense,
-  deleteExpense,
-  updateExpense
-} from '../store/slices/expenseSlice'
+import { deleteExpense } from '../store/slices/expenseSlice'
 
 type Props = NativeStackScreenProps<RootNativeStackParamList, 'ManageExpense'>
 
@@ -25,42 +21,22 @@ const ManageExpense: React.FC<Props> = ({ route, navigation }) => {
     })
   }, [navigation, expenseId])
 
-  const onCancel = () => {
-    navigation.goBack()
-  }
-
-  const onConfirm = () => {
-    const expense = {
-      description: 'test',
-      amount: 19.99,
-      date: '2023-05-19'
-    }
-
-    if (isEditing) {
-      dispatch(updateExpense({ ...expense, id: expenseId! }))
-    } else {
-      dispatch(addExpense({ ...expense, id: Math.random().toString() }))
-    }
-
-    navigation.goBack()
-  }
-
   const onDelete = () => {
     dispatch(deleteExpense({ id: expenseId! }))
     navigation.goBack()
   }
 
+  const onCancel = () => {
+    navigation.goBack()
+  }
+
   return (
     <View style={styles.container}>
-      <View style={styles.buttons}>
-        <Button mode='flat' onPress={onCancel} additionalStyles={styles.button}>
-          Cancel
-        </Button>
-
-        <Button onPress={onConfirm} additionalStyles={styles.button}>
-          {isEditing ? 'Update' : 'And'}
-        </Button>
-      </View>
+      <ExpenseForm
+        isEditing={isEditing}
+        expenseId={expenseId ?? Math.random().toString()}
+        onCancel={onCancel}
+      />
 
       {isEditing && (
         <View style={styles.deleteContainer}>
@@ -83,17 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: GLOBAL_COLORS.primary800
-  },
-
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  button: {
-    minWidth: 120,
-    marginHorizontal: 8
   },
 
   deleteContainer: {
